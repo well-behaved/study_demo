@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--aop测试-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.xue.study.springStudy"/>
+    <!--开启aop解析器-->
+   <!-- proxy-target-class属性，默认为false，表示使用jdk动态代理织入增强。如果目标类没有声明接口，则spring将自动使用CGLib动态代理。-->
+    <!-- 代理类是否可以暴露 expose-proxy 一般想要手动获取代理类时开启，如解决同类调用方法的问题-->
+    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true"/>
+    <bean id="performanceService" class="com.xue.study.springStudy.service.impl.PerformanceServiceImpl">
+    </bean>
+    <!--ioc测试-->
+    <bean id="helloWorldBean" class="com.xue.study.springStudy.service.impl.HelloImpl">
+        <property name="name" value="薛先生"/>
+    </bean>
+
+
+</beans>

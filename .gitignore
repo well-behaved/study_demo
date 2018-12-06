@@ -1,0 +1,16 @@
+*.class
+.classpath
+.project
+.settings/
+target/
+**/*/target/
+**/*/logs/
+.metadata/
+*.iml
+.idea/
+/.DS_Store
+/velocity.log*
+/bin/
+*.log
+**/rebel.xml
+
