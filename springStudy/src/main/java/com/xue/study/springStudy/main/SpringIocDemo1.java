@@ -16,6 +16,8 @@ public class SpringIocDemo1 {
         ApplicationContext applicationContext;
         FileSystemXmlApplicationContext fileSystemXmlApplicationContext;
 
+
+
         //-----------BeanFactory IoC容器---------------------//
         //从classpath路径上装载XML的配置信息
         Resource resource = new ClassPathResource("springDemo1.xml");
