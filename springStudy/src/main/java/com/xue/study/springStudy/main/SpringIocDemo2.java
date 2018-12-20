@@ -11,7 +11,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class SpringIocDemo2 {
     public static void main(String[] args) {
-        ClassPathResource res = new ClassPathResource("beans.xml");
+        ClassPathResource res = new ClassPathResource("springDemo1.xml");
 
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!--配置ProxyFactoryBean-->
+    <!--1，定义使用的通知器Advisor-->
+    <bean id="beforeAdvisor" class="com.xue.study.springStudy.aop.common.Aop1.SayHelloBeforeAdvice"/>
+    <bean id="afterAdvisor" class="com.xue.study.springStudy.aop.common.Aop1.SayHelloAfterReturnAdvice"/>
+    <!--<bean id="afterAdvisor" class="com.xue.study.springStudy.aop.common.Aop1.SayHelloAfterAdvice"/>-->
+    <!--2，定义ProxyFactoryBean-->
+    <bean id="testAOP" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--3，设定与AOP实现相关的重要属性-->
+        <!--3.1，proxyInterface-->
+        <property name="proxyInterfaces" value="com.xue.study.springStudy.aop.common.Aop1.wait"/>
+        <!--3.2，target（目标对象）-->
+        <property name="target">
+            <bean class="com.xue.study.springStudy.aop.common.Aop1.waiter"/>
+        </property>
+        <!--3.3，interceptorNames（需要定义的通知器）-->
+        <property name="interceptorNames">
+            <list>
+                <value>afterAdvisor</value>
+                <value>beforeAdvisor</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+

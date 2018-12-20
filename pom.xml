@@ -34,7 +34,6 @@
                     <version>2.20.1</version>
                     <configuration>
                         <skipTests>true</skipTests>
-                        <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
                 <!--打包插件-->
