@@ -84,6 +84,8 @@
         <module>mapStruct</module>
         <module>springStudy</module>
         <module>webstudy</module>
+        <module>webdubbo</module>
+        <module>webdubbo2</module>
     </modules>
 
 </project>
