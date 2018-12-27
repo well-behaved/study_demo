@@ -7,7 +7,60 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         ">
-    <!-- 调用远程的接口 -->
-    <dubbo:reference id="hellowService" interface="com.xue.dubbodemo.service.HellowService"/>
+    <!-- 调用远程的接口 配置同样在 dubbo:service  -->
+    <!-- check="true" 启动时 会检查服务是否可用-->
+    <!-- retries="2" 失败自动切换，当出现失败，重试其它服务器 通常用于读操作，但重试会带来更长延迟。可通过 retries="2" 来设置重试次数(不含第一次)。-->
+    <!--
+        cluster="failfast"
+        Failfast快速失败，只发起一次调用，失败立即报错。通常用于非幂等性的写操作，比如新增记录。
+        Failsafe失败安全，出现异常时，直接忽略。通常用于写入审计日志等操作。
+        Failback失败自动恢复，后台记录失败请求，定时重发。通常用于消息通知操作。
+        Forking并行调用多个服务器，只要一个成功即返回。通常用于实时性要求较高的读操作，但需要浪费更多服务资源。可通过 forks="2" 来设置最大并行数。
+        Broadcast广播调用所有提供者，逐个调用，任意一台报错则报错 [2]。通常用于通知所有提供者更新缓存或日志等本地资源信息。
+     -->
+    <!--
+        loadbalance="roundrobin"
+        Random随机，按权重设置随机概率。在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。
+        RoundRobin轮询，按公约后的权重设置轮询比率。存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。
+        LeastActive最少活跃调用数，相同活跃数的随机，活跃数指调用前后计数差。使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。
+        ConsistentHash LoadBalance一致性 Hash，相同参数的请求总是发到同一提供者。当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。
+    -->
+    <!-- protocol="dubbo" 协议设置-->
+
+
+    <dubbo:reference id="hellowService" interface="com.xue.dubbodemo.service.HellowService"
+                     check="false" retries="2" cluster="failfast" loadbalance="roundrobin"
+                     protocol="dubbo" validation="true" async="true"/>
+    <!--async="true"  基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。 -->
+    <!--sent="true"  等待消息发出，消息发送失败将抛出异常  false 不等待消息发出，将消息放入 IO 队列，即刻返回。-->
+    <!--return="false" 只是想异步，完全忽略返回值 减少 Future 对象的创建和管理成本-->
+    <dubbo:reference id="hellowService3" interface="com.xue.dubbodemo.service.HellowService"
+                     async="true" sent="true">
+        <dubbo:method name="sayHellow" sent="true" return="true"/>
+    </dubbo:reference>
+    <!--  callback="true" 参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是
+    callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑 [1]。 -->
+    <dubbo:reference id="callBackService" interface="com.xue.dubbodemo.service.HellowService">
+        <dubbo:method name="callback">
+            <dubbo:argument type="com.xue.dubbodemo.listeren.CallbackListener" callback="true"/>
+        </dubbo:method>
+    </dubbo:reference>
+
+    <!-- validation="true"
+    开启验证
+-->
+    <dubbo:reference id="validationService" interface="com.xue.dubbodemo.service.ValidationService" validation="true"/>
+    <!--
+        url="dubbo://localhost:20885" 直接连接
+        -->
+    <!-- registry="registry2"指定注册中心为配置的那个-->
+    <!--version="*" 版本号 *表示不区分版本号-->
+    <!-- cache="lru" 缓存设置
+     lru 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。 最新
+        threadlocal 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。
+        jcache 与 JSR107 集成，可以桥接各种缓存实现。
+    -->
+    <dubbo:reference id="hellowService2" url="dubbo://localhost:20885"
+                     interface="com.xue.dubbodemo.service.HellowService" cache="lru" registry="registry2" version="*"/>
 </beans>
 

@@ -9,4 +9,6 @@
         ">
     <!-- 给消费者提供服务的接口 -->
     <dubbo:service ref="hellowService" interface="com.xue.dubbodemo.service.HellowService" ></dubbo:service>
+
+    <dubbo:service ref="validationService" interface="com.xue.dubbodemo.service.ValidationService" ></dubbo:service>
 </beans>
