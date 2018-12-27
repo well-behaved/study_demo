@@ -27,10 +27,12 @@
     -->
     <!-- protocol="dubbo" 协议设置-->
 
-
+    <!--  connections="10" 限制客户端服务使用连接不能超过 10 个 -->
+    <!-- actives="10"  每客户端并发执行（或占用连接的请求数）不能超过 10 个 -->
+    <!-- sticky="true" 粘滞连接用于有状态服务，尽可能让客户端总是向同一提供者发起调用，除非该提供者挂了，再连另一台。 -->
     <dubbo:reference id="hellowService" interface="com.xue.dubbodemo.service.HellowService"
                      check="false" retries="2" cluster="failfast" loadbalance="roundrobin"
-                     protocol="dubbo" validation="true" async="true"/>
+                     protocol="dubbo" validation="true" async="true" connections="10" actives="10" sticky="true"/>
     <!--async="true"  基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。 -->
     <!--sent="true"  等待消息发出，消息发送失败将抛出异常  false 不等待消息发出，将消息放入 IO 队列，即刻返回。-->
     <!--return="false" 只是想异步，完全忽略返回值 减少 Future 对象的创建和管理成本-->
@@ -38,8 +40,7 @@
                      async="true" sent="true">
         <dubbo:method name="sayHellow" sent="true" return="true"/>
     </dubbo:reference>
-    <!--  callback="true" 参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是
-    callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑 [1]。 -->
+
     <dubbo:reference id="callBackService" interface="com.xue.dubbodemo.service.HellowService">
         <dubbo:method name="callback">
             <dubbo:argument type="com.xue.dubbodemo.listeren.CallbackListener" callback="true"/>

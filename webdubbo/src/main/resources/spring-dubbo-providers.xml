@@ -8,7 +8,12 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         ">
     <!-- 给消费者提供服务的接口 -->
-    <dubbo:service ref="hellowService" interface="com.xue.dubbodemo.service.HellowService" ></dubbo:service>
+    <!-- executes="10" 服务器端并发执行（或占用线程池线程数）不能超过 10 个： -->
+    <dubbo:service ref="hellowService" interface="com.xue.dubbodemo.service.HellowService" >
+        <dubbo:method name="callback" executes="10">
+            <dubbo:argument type="com.xue.dubbodemo.listeren.CallbackListener" callback="true"/>
+        </dubbo:method>
+    </dubbo:service>
 
     <dubbo:service ref="validationService" interface="com.xue.dubbodemo.service.ValidationService" ></dubbo:service>
 </beans>

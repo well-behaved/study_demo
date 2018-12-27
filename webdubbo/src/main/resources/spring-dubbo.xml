@@ -11,8 +11,8 @@
     <!-- 给dubbo服务者起个名 -->
     <dubbo:application name="xue-dubbo"/>
     <!-- 用zookeeper注册服务中心暴露服务地址 -->
-    <!-- 暴露dubbo的通信端口 -->
-    <dubbo:protocol name="dubbo" port="20885" />
+    <!--  accepts="10" 暴露dubbo的通信端口 限制服务器端接受的连接不能超过 10 个-->
+    <dubbo:protocol name="dubbo" port="20885"  accepts="10"  />
     <!--<dubbo:provider ></dubbo:provider>-->
     <dubbo:provider export="true" token="xuetocken"/>
 

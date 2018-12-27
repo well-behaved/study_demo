@@ -20,7 +20,8 @@
     <!-- 多注册中心配置-->
     <dubbo:registry id="registry2" address="zookeeper://127.0.0.1:2181" protocol="zookeeper"></dubbo:registry>
     <!-- 给dubbo服务者起个名 -->
-    <dubbo:application name="xue-dubbo"/>
+    <!--logger="log4j"  dubbo 开始内置 log4j、slf4j、jcl、jdk 这些日志框架的适配[1]-->
+    <dubbo:application name="xue-dubbo" logger="log4j"/>
     <!-- 用zookeeper注册服务中心暴露服务地址 -->
     <!-- 暴露dubbo的通信端口 -->
     <!--
@@ -39,9 +40,11 @@
         eager 优先创建Worker线程池。在任务数量大于corePoolSize但是小于maximumPoolSize时，优先创建Worker来处理任务。当任务数量大于maximumPoolSize时，将任务放入阻塞队列中。阻塞队列充满时抛出RejectedExecutionException。(相比于cached:cached在任务数量超过maximumPoolSize时直接抛出异常而不是将任务放入阻塞队列)
     -->
     <!--name="dubbo" 协议设置 -->
-    <dubbo:protocol name="dubbo" port="20885" dispatcher="all" threadpool="fixed" threads="100"/>
+    <!--accesslog="true" 将访问日志输出到当前应用的log4j日志-->
+    <dubbo:protocol name="dubbo" port="20885" dispatcher="all" threadpool="fixed" threads="100" accesslog="true"/>
     <!--多协议设置 -->
     <!--<dubbo:protocol name="rmi" port="1099" />-->
+    <!-- token="xuetocken" 开启令牌验证 固定token令牌，相当于密码 -->
     <dubbo:provider export="true" token="xuetocken"/>
     <!--关闭所有服务的启动时检查 (没有提供者时报错)-->
     <dubbo:consumer check="false"/>
