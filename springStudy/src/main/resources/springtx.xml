@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-aop-4.2.xsd
+        ">
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- 注册数据源 C3P0 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  >
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="classDao" class="com.xue.study.springStudy.transactional.dao.impl.ClassDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="classService" class="com.xue.study.springStudy.transactional.service.impl.ClassServiceImpl">
+        <property name="classDao" ref="classDao"/>
+    </bean>
+
+    <!-- 事务管理器 -->
+
+    <bean id="myTracnsactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 事务代理工厂 -->
+    <!-- 生成事务代理对象 -->
+    <bean id="serviceProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="myTracnsactionManager"></property>
+        <property name="target" ref="classService"></property>
+        <property name="transactionAttributes">
+            <props>
+                <!-- 主要 key 是方法
+                    ISOLATION_DEFAULT  事务的隔离级别
+                    PROPAGATION_REQUIRED  传播行为
+                -->
+                <prop key="add*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>
+                <!-- -Exception 表示发生指定异常回滚，+Exception 表示发生指定异常提交 -->
+                <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-BuyStockException</prop>
+            </props>
+        </property>
+
+    </bean>
+
+
+</beans>

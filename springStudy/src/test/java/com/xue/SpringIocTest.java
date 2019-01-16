@@ -11,4 +11,8 @@ import org.junit.Test;
 public class SpringIocTest {
     @Test
     public void iocTest1(){}
+    @Test
+    public void test(){
+        System.out.println(WorkflowTypeEnums.APPLY_ALTER_PRICE);
+    }
 }

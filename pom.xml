@@ -97,6 +97,7 @@
         <module>webstudy</module>
         <module>webdubbo</module>
         <module>webdubbo2</module>
+        <module>otherdemo</module>
     </modules>
 
 </project>
