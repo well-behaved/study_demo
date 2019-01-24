@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+       default-autowire="byType">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.xue.study.springStudy.autowire" />
+    <!--自动装配-->
+    <!--<bean id="myClass" class="com.xue.study.springStudy.autowire.MyClass">
+    </bean>
+
+    <bean id="teacher" class="com.xue.study.springStudy.autowire.Teacher">
+        <property name="name" value="薛老手"></property>
+    </bean>-->
+
+
+</beans>

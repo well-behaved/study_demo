@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/schema/user"
+        elementFormDefault="qualified">
+    <!-- 描述了一个targetNamespace，并且创建了一个element
+     user2。里面有三个attribute。主要是为了验证Spring配置文件中的自定义格式。再进一步解释，就是，Spring位置文件中使用的user2自定义标签中，
+     属性只能是上面的三种，有其他的属性的话，就会报错。-->
+    <element name="user">
+        <complexType>
+            <attribute name="id" type="string"/>
+            <attribute name="userName" type="string"/>
+            <attribute name="email" type="string"/>
+        </complexType>
+    </element>
+</schema>

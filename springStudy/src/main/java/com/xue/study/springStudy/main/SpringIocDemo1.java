@@ -27,6 +27,8 @@ public class SpringIocDemo1 {
         System.out.println(hello.sayHellow());
 
 
+
+
 		/*
 		在XmlBeanFactory中，初始化了一个
         XmlBeanDefinitionReader对象，有了这个Reader对象，那些以XML方式定义的BeanDefinition就有了处理的地方。

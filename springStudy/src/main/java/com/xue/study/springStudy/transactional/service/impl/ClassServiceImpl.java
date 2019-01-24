@@ -23,7 +23,11 @@ public class ClassServiceImpl implements ClassService {
     @Override
     @Transactional
     public int addOneAnnotation(ClassDo classDo) {
-        return classDao.addOne(classDo);
+        int num = classDao.addOne(classDo);
+        if(1==1){
+            throw new RuntimeException("事务回滚测试");
+        }
+        return num;
     }
 
 

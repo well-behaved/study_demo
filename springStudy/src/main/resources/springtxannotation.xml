@@ -36,7 +36,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!-- 启用事务注解 -->
-    <tx:annotation-driven transaction-manager="myTracnsactionManager"/>
+    <tx:annotation-driven mode="proxy" transaction-manager="myTracnsactionManager"/>
 
 
 
