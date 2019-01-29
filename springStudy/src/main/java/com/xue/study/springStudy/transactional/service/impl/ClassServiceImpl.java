@@ -21,7 +21,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    @Transactional
+//    @Transactional()
     public int addOneAnnotation(ClassDo classDo) {
         int num = classDao.addOne(classDo);
         if(1==1){

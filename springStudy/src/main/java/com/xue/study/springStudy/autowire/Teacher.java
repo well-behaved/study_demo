@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
  * @Date: 2019/1/24 11:50
  * @Description:
  */
-@Data
-@Component
-public class Teacher {
-    private String name = "薛先生";
-
+public interface Teacher {
+    void sysName();
 }

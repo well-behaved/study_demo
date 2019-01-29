@@ -19,11 +19,8 @@ public class Main {
         //实例化IOC容器,此时容器并未实例化beans-config.xml所定义的各个受管bean.
         XmlBeanFactory factory = new XmlBeanFactory(resource);
         MyClass myClass = (MyClass) factory.getBean("myClass");
-        System.out.println(
-                Optional.of(myClass)
-                .map(MyClass::getTeacher)
-                .map(Teacher::getName)
-                .orElse(null)
-        );
+       Optional.ofNullable(myClass).map(MyClass::getXueTeacherImpl).ifPresent(
+               Teacher::sysName
+       );
     }
 }
