@@ -11,6 +11,8 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-aop-4.2.xsd
         ">
+       <!-- 获得代理类-->
+   <!-- <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>-->
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -28,6 +30,7 @@
 
     <bean id="classService" class="com.xue.study.springStudy.transactional.service.impl.ClassServiceImpl">
         <property name="classDao" ref="classDao"/>
+        <property name="platformTransactionManager" ref="myTracnsactionManager"/>
     </bean>
 
     <!-- 事务管理器 -->
@@ -47,9 +50,9 @@
                     ISOLATION_DEFAULT  事务的隔离级别 使用数据库默认的隔离级别。
                     PROPAGATION_REQUIRED  传播行为 如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。这是最常见的选择。
                 -->
-                <prop key="add*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>
+                <prop key="iadd*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>
                 <!-- -Exception 表示发生指定异常回滚，+Exception 表示发生指定异常提交 -->
-                <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-BuyStockException</prop>
+                <prop key="iadd*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-BuyStockException</prop>
             </props>
         </property>
 

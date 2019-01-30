@@ -9,13 +9,23 @@ import com.xue.study.springStudy.transactional.dto.ClassDo;
  */
 public interface ClassService {
     /**
-     * 添加一个
+     * xml配置添加一些
+     * @param classDo
      * @return
      */
-    int addOne(ClassDo classDo);
+    int iaddOnes(ClassDo classDo);
     /**
      * 添加一个
      * @return
      */
+    int iaddOne(ClassDo classDo);
+    /**
+     * 注解式添加一个
+     * @return
+     */
     int addOneAnnotation(ClassDo classDo);
+    /**
+     * 编程式
+     */
+    public int programmingAddOne(ClassDo classDo);
 }

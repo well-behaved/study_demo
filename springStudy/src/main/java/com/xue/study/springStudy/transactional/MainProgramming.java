@@ -10,11 +10,10 @@ import java.util.Random;
 
 /**
  * @Auther: xuexiong@souche.com
- * @Date: 2019/1/16 18:42
- * @Description:
+ * @Date: 2019/1/30 11:16
+ * @Description: 编程式事物的实现
  */
-public class main {
-
+public class MainProgramming {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("springtx.xml");
         ClassService classService =  (ClassService) applicationContext.getBean("serviceProxy");
@@ -24,6 +23,6 @@ public class main {
         classDo.setClassName("薛先生"+classDo.getClassId());
         System.out.println(JsonUtils.objetcToJsonCommon(classDo));
 
-        classService.iaddOnes(classDo);
+        classService.programmingAddOne(classDo);
     }
 }
