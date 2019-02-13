@@ -13,4 +13,5 @@ target/
 /bin/
 *.log
 **/rebel.xml
+**/rebel.xml.bak
 
