@@ -23,14 +23,12 @@ public class HttpServer {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            System.err.println(
-                    "Usage: " + HttpServer.class.getSimpleName() +
-                            " <port>");
-            return;
-        }
-        int port = Integer.parseInt(args[0]);
+        int port = 9890;
         new HttpServer(port).start();
+
+        //主线程休眠等待 此时可以请求 localhost9890
+        Thread.sleep(600000);
+        System.out.println("main over");
     }
 
     public void start() throws Exception {
@@ -44,9 +42,18 @@ public class HttpServer {
                             throws Exception {
                         System.out.println("initChannel ch:" + ch);
                         ch.pipeline()
-                                .addLast("decoder", new HttpRequestDecoder())   // 1
-                                .addLast("encoder", new HttpResponseEncoder())  // 2
+                                //用于解码request
+                                .addLast("decoder", new HttpRequestDecoder())
+                                // 用于编码response
+                                .addLast("encoder", new HttpResponseEncoder())
+                                /*
+                                消息聚合器（重要）
+                                为什么能有FullHttpRequest这个东西，就是因为有他，HttpObjectAggregator，
+                                如果没有他，就不会有那个消息是FullHttpRequest的那段Channel，同样也不会有FullHttpResponse
+                                消息合并的数据大小，如此代表聚合的消息内容长度不超过512kb。
+                                 */
                                 .addLast("aggregator", new HttpObjectAggregator(512 * 1024))    // 3
+                                //添加我们自己的处理接口
                                 .addLast("handler", new HttpHandler());        // 4
                     }
                 })
@@ -54,5 +61,6 @@ public class HttpServer {
                 .childOption(ChannelOption.SO_KEEPALIVE, Boolean.TRUE);
 
         b.bind(port).sync();
+        System.out.println("start over");
     }
 }
