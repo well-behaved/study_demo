@@ -106,7 +106,6 @@
         <module>webdubbo2</module>
         <module>otherdemo</module>
         <module>nettyserver</module>
-        <module>nettyclient</module>
     </modules>
 
 </project>
