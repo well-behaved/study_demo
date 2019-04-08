@@ -1,4 +1,4 @@
-package com.xue.study.springStudy.main;
+package com.xue.study.springStudy.ioc;
 
 import com.xue.study.springStudy.service.IHello;
 import org.springframework.beans.factory.xml.XmlBeanFactory;

@@ -55,6 +55,7 @@ public class FixedLengthFrameDecoderTest {
 
         EmbeddedChannel channel = new EmbeddedChannel(
                 new FixedLengthFrameDecoder(3));
+        assert
         assertFalse(channel.writeInbound(input.readBytes(2)));
         assertTrue(channel.writeInbound(input.readBytes(7)));
 

@@ -1,4 +1,4 @@
-package com.xue.study.springStudy.main;
+package com.xue.study.springStudy.ioc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

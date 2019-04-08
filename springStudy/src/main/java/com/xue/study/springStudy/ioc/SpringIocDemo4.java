@@ -1,14 +1,8 @@
-package com.xue.study.springStudy.main;
+package com.xue.study.springStudy.ioc;
 
-import com.xue.study.springStudy.service.IExtendPerformanceService;
 import com.xue.study.springStudy.service.IHello;
-import com.xue.study.springStudy.service.IPerformanceService;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 /**
  * @Auther: xuexiong@souche.com
