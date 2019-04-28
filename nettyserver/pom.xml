@@ -30,6 +30,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.ioc.version>4.3.6.RELEASE</spring.ioc.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <protobuf-java.version>2.5.0</protobuf-java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -40,6 +41,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.56</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf-java.version}</version>
         </dependency>
      <!--   <dependency>
             <groupId>io.netty</groupId>

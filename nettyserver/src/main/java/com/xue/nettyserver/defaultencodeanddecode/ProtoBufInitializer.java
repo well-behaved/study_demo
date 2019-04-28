@@ -12,6 +12,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 
 /**
  * Listing 11.14 Using protobuf
+ * 序列化
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
@@ -32,11 +33,15 @@ public class ProtoBufInitializer extends ChannelInitializer<Channel> {
     }
 
     public static final class ObjectHandler
-        extends SimpleChannelInboundHandler<Object> {
-        @Override
+            extends SimpleChannelInboundHandler<Object> {
         public void channelRead0(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
+                throws Exception {
             // Do something with the object
+        }
+
+        @Override
+        protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+            this.channelRead0(ctx,msg);
         }
     }
 }
