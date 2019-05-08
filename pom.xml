@@ -23,7 +23,6 @@
         <module>webdubbo2</module>
         <module>otherdemo</module>
         <module>nettyserver</module>
-        <module>tomcatdemo</module>
     </modules>
     <dependencies>
         <dependency>
