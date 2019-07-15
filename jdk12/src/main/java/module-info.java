@@ -16,7 +16,7 @@ module com.xue.demo.jdk {
     requires transitive java.compiler;
     requires  java.base;
     requires java.scripting;
-    requires kotlin.
+//    requires kotlin.
     /*
     导出jdk包 允许仅在编译时和运行时访问指定包的公共API
      */
