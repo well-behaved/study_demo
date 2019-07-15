@@ -20,6 +20,7 @@
                     <source>12</source>
                     <target>12</target>
                     <encoding>utf-8</encoding>
+                    <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
