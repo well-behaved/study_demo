@@ -26,6 +26,8 @@
         <module>jdk12</module>
         <module>jdk12two</module>
         <module>jdkdemo</module>
+        <module>guava</module>
+        <module>shardingjdbc</module>
     </modules>
     <dependencies>
         <dependency>
