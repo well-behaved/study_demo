@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.demo.shardingjdbc.UserMapper">
+
+    <insert id="save" parameterType="com.xue.demo.shardingjdbc.User">
+        INSERT INTO t_user(id,name,phone,email,sex,password,create_time)
+        VALUES
+        (
+            #{id},#{name},#{phone},#{email},#{sex},#{password},#{createTime}
+        )
+    </insert>
+
+    <select id="getByIds" parameterType="list" resultType="com.xue.demo.shardingjdbc.User">
+        select * from  t_user
+        WHERE id IN
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="truncate">
+       TRUNCATE TABLE t_user
+    </select>
+
+</mapper>
