@@ -70,5 +70,15 @@ public class UserTest {
         System.out.println(JSON.toJSONString(
                 userMapper.getByIds(listParam)));
     }
+    @Test
+    public void getByIdsAndName() {
+        List<Long> ids = new ArrayList<>();
+        ids.add(12L);
+        ids.add(13L);
+        List<String> names = new ArrayList<>();
+        names.add("12312");
+        System.out.println(JSON.toJSONString(
+                userMapper.getByIdsAndName(ids,names)));
+    }
 
 }

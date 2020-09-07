@@ -11,15 +11,26 @@ public interface UserMapper {
      * 保存
      */
     void save(User user);
+
     /**
      * 删除数据
      */
     void truncate();
- 
+
     /**
      * 查询
+     *
      * @param ids
      * @return
      */
     List<User> getByIds(@Param("ids") List<Long> ids);
+
+    /**
+     * 查询
+     *
+     * @param ids
+     * @return
+     */
+    List<User> getByIdsAndName(@Param("ids") List<Long> ids
+            , @Param("name") List<String> name);
 }

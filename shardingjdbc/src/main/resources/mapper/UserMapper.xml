@@ -18,6 +18,18 @@
         </foreach>
     </select>
 
+    <select id="getByIdsAndName" resultType="com.xue.demo.shardingjdbc.User">
+        select * from  t_user
+        WHERE id IN
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+         or name in
+        <foreach collection="name" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
     <select id="truncate">
        TRUNCATE TABLE t_user
     </select>
