@@ -28,6 +28,7 @@
         <module>jdkdemo</module>
         <module>guava</module>
         <module>shardingjdbc</module>
+        <module>forkjoindemo</module>
     </modules>
     <dependencies>
         <dependency>
