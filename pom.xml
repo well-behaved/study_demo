@@ -29,6 +29,7 @@
         <module>guava</module>
         <module>shardingjdbc</module>
         <module>forkjoindemo</module>
+        <module>webflux</module>
     </modules>
     <dependencies>
         <dependency>
