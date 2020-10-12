@@ -30,6 +30,7 @@
         <module>shardingjdbc</module>
         <module>forkjoindemo</module>
         <module>webflux</module>
+        <module>demo-spring-boot starter</module>
     </modules>
     <dependencies>
         <dependency>
