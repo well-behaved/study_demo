@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.louis.mybatis.dao.EmployeesMapper">
+
+    <resultMap id="BaseResultMap" type="com.xue.demo.mybatis.bean.Employee">
+        <id column="EMPLOYEE_ID" property="employeeId" jdbcType="DECIMAL"/>
+        <result column="FIRST_NAME" property="firstName" jdbcType="VARCHAR"/>
+        <result column="LAST_NAME" property="lastName" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="SALARY" property="salary" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    	EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, SALARY
+    	from EMPLOYEES
+    	where EMPLOYEE_ID = #{employeeId,jdbcType=DECIMAL}
+  </select>
+    <select id="selectByMinSalary" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, SALARY
+        from EMPLOYEES
+        <if test="min_salary != null">
+            where SALARY <![CDATA[<=]]> #{min_salary,jdbcType=DECIMAL}
+        </if>
+    </select>
+</mapper>
