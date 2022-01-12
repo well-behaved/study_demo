@@ -33,6 +33,10 @@ public class HTTPRequestRegistrar implements ImportBeanDefinitionRegistrar,
     private Environment environment;
     private ResourceLoader resourceLoader;
 
+    /**
+     * @param annotationMetadata     当前类注解信息
+     * @param beanDefinitionRegistry beandefinition 注册中心
+     */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
         registerHttpRequest(beanDefinitionRegistry);
@@ -44,14 +48,20 @@ public class HTTPRequestRegistrar implements ImportBeanDefinitionRegistrar,
      * @param beanDefinitionRegistry
      */
     private void registerHttpRequest(BeanDefinitionRegistry beanDefinitionRegistry) {
+        /*
+        扫描指定包下带有HttpUtilAnnotations注解的类
+         */
         ClassPathScanningCandidateComponentProvider classScanner = getClassScanner();
         classScanner.setResourceLoader(this.resourceLoader);
-        //指定只关注标注了@HTTPUtil注解的接口
+        //指定只关注标注了@HttpUtilAnnotations注解的接口
         AnnotationTypeFilter annotationTypeFilter = new AnnotationTypeFilter(HttpUtilAnnotations.class);
         classScanner.addIncludeFilter(annotationTypeFilter);
         //指定扫描的基础包
         String basePack = "com.xue.demo.springstarter.myannotations";
         Set<BeanDefinition> beanDefinitionSet = classScanner.findCandidateComponents(basePack);
+        /*
+        注册到spring ioc容器中
+         */
         for (BeanDefinition beanDefinition : beanDefinitionSet) {
             if (beanDefinition instanceof AnnotatedBeanDefinition) {
                 registerBeans(((AnnotatedBeanDefinition) beanDefinition));
@@ -66,7 +76,13 @@ public class HTTPRequestRegistrar implements ImportBeanDefinitionRegistrar,
      */
     private void registerBeans(AnnotatedBeanDefinition annotatedBeanDefinition) {
         String className = annotatedBeanDefinition.getBeanClassName();
-        ((DefaultListableBeanFactory) this.beanFactory).registerSingleton(className, createProxy(annotatedBeanDefinition));
+        //注册到容器中
+        ((DefaultListableBeanFactory) this.beanFactory)
+                .registerSingleton(
+                        className
+                        //创建代理类
+                        , createProxy(annotatedBeanDefinition)
+                );
     }
 
     /**

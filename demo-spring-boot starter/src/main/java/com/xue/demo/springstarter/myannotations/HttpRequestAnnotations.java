@@ -10,7 +10,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * @author: xuexiong@souche.com
  * @date: 2022/1/12 14:47
- * @description:
+ * @description: 方法级注解，标注该注解的方法，会跟进设置的url值进行请求
  */
 @Target(ElementType.METHOD)
 @Inherited
