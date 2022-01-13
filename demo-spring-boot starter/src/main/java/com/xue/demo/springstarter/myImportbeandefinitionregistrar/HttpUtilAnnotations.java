@@ -1,4 +1,4 @@
-package com.xue.demo.springstarter.myannotations;
+package com.xue.demo.springstarter.myImportbeandefinitionregistrar;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

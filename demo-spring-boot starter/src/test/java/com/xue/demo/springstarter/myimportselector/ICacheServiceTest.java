@@ -1,6 +1,7 @@
-package com.xue.demo.springstarter.myannotations;
+package com.xue.demo.springstarter.myimportselector;
 
 import com.xue.demo.springstarter.DemoApplication;
+import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,22 +10,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author: xuexiong@souche.com
- * @date: 2022/1/12 15:45
+ * @date: 2022/1/13 16:29
  * @description:
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
-public class IRequestDemoTest {
+public class ICacheServiceTest extends TestCase {
     @Autowired
-    private IRequestDemo iRequestDemo;
-
+    private ICacheService iCacheService;
     @Test
-    public void testTest1() {
-        iRequestDemo.test1();
-    }
-
-    @Test
-    public void testTest2() {
-        iRequestDemo.test2();
+    public void testGetCacheType() {
+        System.out.println(iCacheService.getCacheType());
     }
 }

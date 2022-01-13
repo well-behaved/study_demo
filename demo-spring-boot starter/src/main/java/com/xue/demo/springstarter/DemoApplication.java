@@ -1,6 +1,8 @@
 package com.xue.demo.springstarter;
 
-import com.xue.demo.springstarter.myannotations.EnableHttpUtil;
+import com.xue.demo.springstarter.myImportbeandefinitionregistrar.EnableHttpUtil;
+import com.xue.demo.springstarter.myimportselector.CacheTypeEnums;
+import com.xue.demo.springstarter.myimportselector.EnableMyCache;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableHttpUtil
+@EnableMyCache(type = CacheTypeEnums.REDIS)
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);

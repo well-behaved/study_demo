@@ -1,4 +1,4 @@
-package com.xue.demo.springstarter.myannotations;
+package com.xue.demo.springstarter.myImportbeandefinitionregistrar;
 
 @HttpUtilAnnotations
 public interface IRequestDemo {

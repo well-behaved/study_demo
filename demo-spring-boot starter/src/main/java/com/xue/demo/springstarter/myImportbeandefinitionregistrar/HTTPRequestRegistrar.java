@@ -1,4 +1,4 @@
-package com.xue.demo.springstarter.myannotations;
+package com.xue.demo.springstarter.myImportbeandefinitionregistrar;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
