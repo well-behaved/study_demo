@@ -29,7 +29,7 @@
     </pluginRepositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.ioc.version>4.3.6.RELEASE</spring.ioc.version>
+        <spring.ioc.version>5.2.22.RELEASE</spring.ioc.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
     </properties>
 
