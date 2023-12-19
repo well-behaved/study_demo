@@ -1,6 +1,7 @@
 package com.xue.demo.mybatis;
 
-import com.xue.demo.mybatis.bean.Employee;
+import com.xue.demo.mybatis.dao.CustomerMapper;
+import com.xue.demo.mybatis.domain.Customer;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -27,21 +28,32 @@ public class SelectDemo {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(inputStream);
 
-        //2. 从SqlSession工厂 SqlSessionFactory中创建一个SqlSession，进行数据库操作
+        /*
+        2. 从SqlSession工厂 SqlSessionFactory中创建一个SqlSession，进行数据库操作
+         */
         SqlSession sqlSession = factory.openSession();
 
-        //3.使用SqlSession查询
-        Map<String, Object> params = new HashMap<String, Object>();
+        /*
+        使用sqlSession进行查询等相关操作
+         */
+        //获取代理类
+        CustomerMapper customerMapper = sqlSession.getMapper(CustomerMapper.class);
+        //插入
+        Customer oneCustomer = new Customer();
+        oneCustomer.setName("张三");
+        oneCustomer.setPhone("18333333333");
+        customerMapper.save(oneCustomer);
+        //查询
+        Customer customer = customerMapper.find(oneCustomer.getId());
+        System.out.println("customer:" + customer.toString());
 
-        params.put("min_salary", 10000);
-        //a.查询工资低于10000的员工
-        List<Employee> result = sqlSession.selectList("com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary", params);
-        //b.未传最低工资，查所有员工
-        List<Employee> result1 = sqlSession.selectList("com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary");
-        System.out.println("薪资低于10000的员工数：" + result.size());
-        //~output :   查询到的数据总数：5
-        System.out.println("所有员工数: " + result1.size());
-        //~output :  所有员工数: 8
+        /*
+         关闭SqlSession 事务等处理
+         */
+        sqlSession.commit();
+        sqlSession.close();
+        // 出现异常的时候，回滚事务
+//        sqlSession.rollback();
     }
 
 }
