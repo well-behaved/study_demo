@@ -32,6 +32,7 @@
         <module>webflux</module>
         <module>demo-spring-boot starter</module>
         <module>mybatisDemo</module>
+        <module>springMybatisDemo</module>
     </modules>
     <dependencies>
         <dependency>

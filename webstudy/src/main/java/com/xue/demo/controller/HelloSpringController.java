@@ -1,8 +1,8 @@
 package com.xue.demo.controller;
 
+import com.xue.demo.bean.Customer;
 import com.xue.demo.bean.UserBean;
 import com.xue.demo.service.HellowService;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HelloSpringController implements LastModified {
     @Autowired
-    HellowService hellowService;
+    private HellowService hellowService;
 
     String message = "Welcome to Spring MVC!";
 
@@ -40,6 +40,13 @@ public class HelloSpringController implements LastModified {
                                             name) {
 
         return new UserBean("张安",34);
+    }
+
+    @RequestMapping("/hello3")
+    @ResponseBody
+    public Customer showMessage3(@RequestParam(value = "id", required = false, defaultValue = "Spring") Long
+                                         id) {
+        return hellowService.find(id);
     }
 
     @Override
