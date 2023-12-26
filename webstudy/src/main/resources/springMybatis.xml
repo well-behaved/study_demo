@@ -22,7 +22,7 @@
         <property name="initialSize" value="${jdbc.initialSize}"/>
     </bean>
 
-    <!--SqlSessionFactory 会话工厂交给spring容器管理-->
+    <!--SqlSessionFactory 会话工厂交给spring容器管理 该类实现了FactoryBean和InitializingBean，其中实现了解析配置文件的逻辑-->
     <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--注入数据源-->
         <property name="dataSource" ref="dataSource"/>
@@ -32,7 +32,7 @@
         <property name="configLocation" value="classpath:mybatisConfig.xml" />
     </bean>
 
-    <!--配置Mapper接口的扫描器-->
+    <!--配置Mapper接口的扫描器 该类实现了BeanDefinitionRegistryPostProcessor和InitializingBean，其中实现了将mapper接口替换成动态代理类的逻辑-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--配置mapper接口所在的包-->
         <property name="basePackage" value="com.xue.demo.dao"/>
