@@ -33,6 +33,7 @@
         <module>demo-spring-boot starter</module>
         <module>mybatisDemo</module>
         <module>springMybatisDemo</module>
+        <module>springBootDemo</module>
     </modules>
     <dependencies>
         <dependency>
